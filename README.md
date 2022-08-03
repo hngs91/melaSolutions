@@ -1,5 +1,5 @@
 # melaSolutions
-Vanialla javascript solution to the below exercise:
+Vanilla javascript solution to the below exercise:
 
 /*
 
