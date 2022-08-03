@@ -1,4 +1,4 @@
-# melaSolutions
+# melaTechTask
 Vanilla javascript solution to the below exercise:
 
 /*
