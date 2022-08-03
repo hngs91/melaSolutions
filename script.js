@@ -1,39 +1,44 @@
 /************** Global Variables **********************/
 let btnShowCountries = document.querySelector('button');
 let searchBar = document.getElementById('searchbar');
-let myTable = document.querySelector('#div_for_table');
-let headers = ['Country', 'Country Code', 'Select'];
+let tableDiv = document.querySelector('#div_for_table');
 let table = document.createElement('table');
 
 /************** Functions **********************/
 // shows the user an alert box containing all the country codes with checked boxes
 function getCheckedCodes() {
+    // creates an array of every checkbox
     let isChecked = document.getElementsByTagName('input');
+
     let arrCodes = [];
 
+    // loops through array of checkboxes and extracts county codes from rows with ticked checkboxes
     for (let i = 0; i < isChecked.length; i++) {
         if (isChecked[i].checked) {
-            arrCodes.push((table.rows[i].cells[1].innerHTML));
+            arrCodes.push(table.rows[i].cells[1].innerHTML);
         }
     }
 
-    alert(JSON.stringify(arrCodes));
+    if (arrCodes.length === 0) {
+        alert("No countries selected.")
+    } else {
+        alert(JSON.stringify(arrCodes));
+    }
 }
 
 // search bar functionality
 function search() {
-    let filter, tr, td, i, txtValue;
-    filter = searchBar.value.toUpperCase();
-    tr = table.getElementsByTagName('tr');
+    let searchTerm = searchBar.value.toUpperCase();
+    let allRows = table.getElementsByTagName('tr');
 
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName('td')[0];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().includes(filter)) {
-                tr[i].style.display = "";
+    for (let i = 0; i < allRows.length; i++) {
+        let countryName = allRows[i].getElementsByTagName('td')[0];
+        if (countryName) {
+            let txtValue = countryName.textContent || countryName.innerText;
+            if (txtValue.toUpperCase().includes(searchTerm)) {
+                allRows[i].style.display = "";
             } else {
-                tr[i].style.display = "none";
+                allRows[i].style.display = "none";
             }
         }
     }
@@ -41,39 +46,45 @@ function search() {
 
 //creates table
 function buildTable() {
+    let headers = ['Country', 'Country Code', 'Select'];
     let headerRow = document.createElement('tr');
 
+    // loops through headers array creating a table header and populating with each header title
     headers.forEach(headerText => {
         let header = document.createElement('th');
         let textNode = document.createTextNode(headerText);
-        header.appendChild(textNode);
-        headerRow.appendChild(header);
+        headerRow.appendChild(header).appendChild(textNode);
     });
+
+    // adds created column titles to the table
     table.appendChild(headerRow);
 
+    // loops through array of Country objects creating a table row
     getCountries().forEach(country => {
         let row = document.createElement('tr');
 
+        // loops through Objects values creating & populating data cells
         Object.values(country).forEach(text => {
             let cell = document.createElement('td');
             let textNode = document.createTextNode(text);
-            cell.appendChild(textNode);
-            row.appendChild(cell);
+            row.appendChild(cell).appendChild(textNode);
         });
 
+        // for every row creates a data cell and populates with a checkbox input type, defaulted to unchecked
         let cell = document.createElement('td');
         let checkBox = document.createElement('input');
         checkBox.type = "checkbox";
-        cell.appendChild(checkBox);
-        row.appendChild(cell);
+        row.appendChild(cell).appendChild(checkBox);
 
+        // adds created rows to the table
         table.appendChild(row);
     });
 
-    myTable.appendChild(table);
+    // populates div with table
+    tableDiv.appendChild(table);
 }
 
-//table data
+// table data
 function getCountries() {
     return (
         [
@@ -334,7 +345,7 @@ btnShowCountries.addEventListener('click', () => {
     getCheckedCodes();
 });
 
-searchBar.addEventListener('input',() =>{
-        search();
+searchBar.addEventListener('input', () => {
+    search();
 })
 
