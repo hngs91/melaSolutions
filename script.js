@@ -3,7 +3,6 @@ let btnShowCountries = document.querySelector('button');
 let searchBar = document.getElementById('searchbar');
 let tableDiv = document.querySelector('#div_for_table');
 let table = document.createElement('table');
-let selectAllBox = document.getElementById('selectAll')
 
 /************** Functions **********************/
 // shows the user an alert box containing all the country codes with checked boxes
@@ -67,7 +66,7 @@ function buildTable() {
         // loops through Objects values creating & populating data cells
         Object.values(country).forEach(text => {
             let cell = document.createElement('td');
-            let textNode = document.createTextNode(text);
+            let textNode = document.createTextNode(text.toString());
             row.appendChild(cell).appendChild(textNode);
         });
 
