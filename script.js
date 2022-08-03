@@ -30,7 +30,7 @@ function search() {
         td = tr[i].getElementsByTagName('td')[0];
         if (td) {
             txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            if (txtValue.toUpperCase().includes(filter)) {
                 tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
@@ -334,7 +334,7 @@ btnShowCountries.addEventListener('click', () => {
     getCheckedCodes();
 });
 
-searchBar.addEventListener('keydown',() =>{
+searchBar.addEventListener('input',() =>{
         search();
 })
 
