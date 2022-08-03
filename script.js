@@ -3,6 +3,7 @@ let btnShowCountries = document.querySelector('button');
 let searchBar = document.getElementById('searchbar');
 let tableDiv = document.querySelector('#div_for_table');
 let table = document.createElement('table');
+let selectAllBox = document.getElementById('selectAll')
 
 /************** Functions **********************/
 // shows the user an alert box containing all the country codes with checked boxes
@@ -348,4 +349,3 @@ btnShowCountries.addEventListener('click', () => {
 searchBar.addEventListener('input', () => {
     search();
 })
-
