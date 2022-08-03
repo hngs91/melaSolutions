@@ -22,7 +22,7 @@ function getCheckedCodes() {
     if (arrCodes.length === 0) {
         alert("No countries selected.")
     } else {
-        alert(JSON.stringify(arrCodes));
+        alert(arrCodes.join(', '));
     }
 }
 
