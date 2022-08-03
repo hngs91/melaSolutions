@@ -73,7 +73,7 @@ function buildTable() {
     myTable.appendChild(table);
 }
 
-//stores table data
+//table data
 function getCountries() {
     return (
         [
